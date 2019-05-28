@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha *.spec.js --timeout=5000",
-    "test:dev": "ENV=TEST npm run test -- --watch=true"
+    "test:dev": "ENV=TEST npm run test -- --watch=true",
+    "test:dev:models": "npm run test:dev -- --grep=Models",
+    "test:dev:integrations": "npm run test:dev -- --grep=Integrations"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "sinon": "^7.3.2"
   },
   "dependencies": {
     "aws-sdk": "^2.462.0"

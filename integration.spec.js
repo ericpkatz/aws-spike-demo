@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const smiley = require('./smiley');
 const ImageUploader = require('./ImageUploader');
 const config = require('./config');
-describe('My App', ()=> {
+describe('Integrations', ()=> {
   it('can upload to AWS', ()=> {
 
     //`https://s3.amazonaws.com/${bucket}/${key}`;
