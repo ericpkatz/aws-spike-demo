@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha *.spec.js",
+    "test": "./node_modules/mocha/bin/mocha *.spec.js --timeout=5000",
     "test:dev": "ENV=TEST npm run test -- --watch=true"
   },
   "keywords": [],
