@@ -18,6 +18,8 @@
     "sinon": "^7.3.2"
   },
   "dependencies": {
-    "aws-sdk": "^2.462.0"
+    "aws-sdk": "^2.462.0",
+    "pg": "^7.11.0",
+    "sequelize": "^5.8.6"
   }
 }
