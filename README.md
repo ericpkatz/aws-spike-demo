@@ -1,5 +1,5 @@
 - npm install
-- create .env file in order to run locally
+- create .env.js file in root directory order to run locally
 ```
 module.exports = {
   DEV: {},
