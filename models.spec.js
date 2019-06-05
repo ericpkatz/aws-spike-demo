@@ -4,6 +4,8 @@ const { User } = db;
 const smiley = require('./smiley');
 const sinon = require('sinon');
 const ImageUploader = require('./ImageUploader');
+const jwt = require('jwt-simple');
+const config = require('./config');
 
 describe('Models', ()=> {
   beforeEach(()=> db.syncAndSeed());
@@ -25,13 +27,17 @@ describe('Models', ()=> {
         .then( user => expect(user.password).not.to.be.ok)
 
     });
-    it('a user can log in with correct credentials', ()=> {
+    it('a user can log in with correct credentials', async ()=> {
+      const user = await User.findOne({ where: { name: 'moe'}});
+      const _token = jwt.encode({ id: user.id }, config.get('JWT'));
       const credentials = {
         name: 'moe',
         password: 'bar'
       };
       return User.authenticate(credentials)
-        .then( user => expect(user.name).to.equal('moe'));
+        .then( token => {
+          expect(token).to.equal(_token);
+        });
 
     });
     it('a user can not log in with bad name', ()=> {

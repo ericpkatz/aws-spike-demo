@@ -1,9 +1,16 @@
 const Sequelize = require('sequelize');
-const conn = new Sequelize(process.env.DATABASE_URL);
+const conn = new Sequelize(process.env.DATABASE_URL, { logging: false });
 const ImageUploader = require('./ImageUploader');
 const bcrypt = require('bcrypt');
+const jwt = require('jwt-simple');
+const config = require('./config');
 
 const User = conn.define('user', {
+  id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    primaryKey: true
+  },
   name: Sequelize.STRING,
   imageURL: Sequelize.STRING,
   password: Sequelize.STRING
@@ -28,6 +35,24 @@ const User = conn.define('user', {
   }
 });
 
+User.exchangeTokenForUser = async function(token){
+  try {
+    const id = await jwt.decode(token, config.get('JWT')).id;
+    const user = await User.findByPk(id);
+    if(!user){
+      const error = new Error();
+      throw error;
+    }
+    return user;
+  }
+  catch(ex){
+    const error = new Error('bad token');
+    error.status = 401;
+    throw error;
+  }
+
+}
+
 User.authenticate = function({ name, password }){
   let _user;
   return this.scope('withPassword').findOne({ where: { name }})
@@ -42,7 +67,7 @@ User.authenticate = function({ name, password }){
     })
     .then( authenticated => {
       if(authenticated){
-        return _user;
+        return jwt.encode({ id: _user.id }, config.get('JWT'));
       }
       const error = new Error('bad credentials');
       error.status = 401;
