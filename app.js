@@ -34,4 +34,11 @@ app.get('/api/sessions', isLoggedIn, (req, res, next)=> {
   res.send(req.user);
 });
 
+app.use((err, req, res, next)=> { 
+  if(err.status !== 401){
+    console.log(err);
+  }
+  res.status(err.status || 500).send(err);
+});
+
 module.exports = app;
