@@ -4,16 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha *.spec.js --timeout=5000",
+    "test": "./node_modules/mocha/bin/mocha *.spec.js --timeout=5000 --require @babel/register --require @babel/polyfill",
     "test:dev": "ENV=TEST npm run test -- --watch=true",
     "test:dev:models": "npm run test:dev -- --grep=Models",
     "test:dev:routes": "npm run test:dev -- --grep=Routes",
-    "test:dev:integrations": "npm run test:dev -- --grep=Integrations"
+    "test:dev:integrations": "npm run test:dev -- --grep=Integrations",
+    "test:dev:client": "npm run test:dev -- --grep=Client -- --require @babel/register -- --require @babel/polyfill"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "sinon": "^7.3.2"
