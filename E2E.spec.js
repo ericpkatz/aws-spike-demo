@@ -25,7 +25,7 @@ describe('E2E', ()=> {
       await page.goto('http://localhost:3002');
       await page.waitForSelector('h1');
       const text = await page.$eval('h1', (el)=> el.innerHTML);
-      expect(text).to.equal('Hello World');
+      expect(text).to.equal('Hello Worl');
     })
   });
 });
