@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 app.use(express.json());
 const { User } = require('./db');
 
@@ -23,6 +24,8 @@ const isLoggedIn = (req, res, next)=> {
   }
   next();
 };
+
+app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 app.post('/api/sessions', (req, res, next)=> {
   User.authenticate(req.body)

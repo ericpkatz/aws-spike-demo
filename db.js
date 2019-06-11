@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
-const conn = new Sequelize(process.env.DATABASE_URL, { logging: false });
+const config = require('./config');
+const conn = new Sequelize(config.get('DATABASE_URL'), { logging: false });
 const ImageUploader = require('./ImageUploader');
 const bcrypt = require('bcrypt');
 const jwt = require('jwt-simple');
-const config = require('./config');
 
 const User = conn.define('user', {
   id: {
