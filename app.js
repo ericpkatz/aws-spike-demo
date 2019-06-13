@@ -24,6 +24,24 @@ const isLoggedIn = (req, res, next)=> {
   next();
 };
 
+app.get('/', (req, res, next)=> {
+  res.send(
+    `
+      <html>
+        <body>
+        </body>
+        <script>
+          setTimeout(()=> {
+          const h1 = document.createElement('h1');
+          h1.innerHTML = 'Hello World';
+          document.body.append(h1);
+          }, 1000);
+        </script>
+      </html>
+    `
+  );
+});
+
 app.post('/api/sessions', (req, res, next)=> {
   User.authenticate(req.body)
     .then( token => res.send({ token }))
