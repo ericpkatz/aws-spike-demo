@@ -35,7 +35,7 @@
     ]
   },
   "dependencies": {
-    "aws-sdk": "^2.462.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt": "^3.0.6",
     "express": "^4.17.1",
     "jwt-simple": "^0.5.6",
