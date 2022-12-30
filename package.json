@@ -22,7 +22,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.4",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "puppeteer": "^1.17.0",
     "react": "^16.8.6",
     "sinon": "^7.3.2",
